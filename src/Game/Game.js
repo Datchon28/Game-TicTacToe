@@ -14,6 +14,8 @@ function Game() {
   const [init, setInit] = useState(Array(9).fill(null))
   const [isX, setIsX] = useState(true)
   const [score, setScore] = useState(0)
+  const [changeNameBtn, setChangeNameBtn] = useState(false)
+  const [name, setName] = useState('')
   
   const winner = CalculatorWinner(init)
 
@@ -28,8 +30,8 @@ function Game() {
     setIsX(!isX)
   }
 
-  const handlePlayAgain = () => {
-    
+  const handleChangeName = () => {
+    setChangeNameBtn(true)
   }
 
   const handleReset = () => {
@@ -56,11 +58,11 @@ function Game() {
         <div className={cx('wrapper-body')}>
           <Board board={init} onClick={handleClick} />
           <div className={cx('turn')}>
-            <h4 className={cx('player-1', 'player', !winner && isX && 'my-turn')}>PLAYER : <br />
+            <h4 className={cx('player-1', 'player', !winner && isX && 'my-turn')}>{changeNameBtn ? <input /> : 'PLAYER : '}<button onClick={handleChangeName} className={cx('change-name')}>i</button><br />
               <span className={cx('player-1--X')}>X</span>
               <span className={cx('score')}>Score : {winner && isX===false ? score + 1 : score}</span>
             </h4>
-            <h4 className={cx('player-2', 'player', !winner && isX === false && 'my-turn')}>PLAYER : <br />
+            <h4 className={cx('player-2', 'player', !winner && isX === false && 'my-turn')}>{changeNameBtn ? <input /> : 'PLAYER : '}<button onClick={handleChangeName} className={cx('change-name')}>i</button><br />
               <span className={cx('player-2--O')}>O</span>
               <span className={cx('score')}>Score : {winner && isX ? score + 1 : score}</span>
 

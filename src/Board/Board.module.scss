@@ -13,3 +13,11 @@
     left: 50%;
     transform: translateX(-50%)
 }
+
+// Mobile 
+@media (max-width:740px) {
+    .board {
+        position: absolute;
+        top: 31%;
+    }
+}
