@@ -18,13 +18,20 @@
 }
 
 .back-btn {
-    font-size: 22px;
-    padding: 6px 12px;
-    color: #fff;
+    font-size: 20px;
+    padding: 8px 12px;
+    color: #dadada;
     background: transparent;
     outline: none;
     border: none;
+    background: rgba(0,0,0,0.4);
+    border-radius: 10px;
     cursor: pointer;
+}
+
+.back-btn:hover {
+    color: #fff;
+    background: rgba(0,0,0,0.6);
 }
 
 .title {
@@ -73,8 +80,27 @@
     align-items: center;
 }
 
+.name-player {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input-name {
+    width: 70%;
+    height: 100%;
+    margin: 0px 6px;
+}
+
 .change-name {
-    padding: 2px 8px;
+    padding: 3px 4px;
+    font-size: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.name {
+    margin-right: 14px;
 }
 
 .player-1 {

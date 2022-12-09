@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind'
-import { useContext } from 'react';
 import style from './Cell.module.scss'
+
+import { useContext } from 'react';
 import { Player } from '../Game/Game';
 
 const cx = classNames.bind(style)
