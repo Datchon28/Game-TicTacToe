@@ -123,7 +123,10 @@ function Game() {
        </div>
       
        <div className={cx('footer')}>
-        <h3 className={cx('is-winner')}>Winner is : {winner ? (isX ? 'O' : 'X') : 'Chua co'}</h3>
+        <h3 className={cx('is-winner')}>Winner is : 
+          {winner ? (isX ? (name2 === '' ? 'Player 2' : name2) : (name1 === '' ? 'Player 1' : name1)) : 'Chua co'}
+        </h3>
+        
         <button className={cx('reset-game')} onClick={handleReset}>Reset Game</button>
        </div>
 
