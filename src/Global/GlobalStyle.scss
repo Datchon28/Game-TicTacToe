@@ -1,38 +1,114 @@
-@import url('https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&family=Poppins:wght@300;400;500;600;700&display=swap') ;
+@import url("https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&family=Poppins:wght@300;400;500;600;700&display=swap");
 
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 html {
-    font-family: 'Kdam Thmor Pro', sans-serif;
-    height: 100%;
-    width: 100%;
+  font-family: "Kdam Thmor Pro", sans-serif;
+  height: 100%;
+  width: 100%;
 }
 
 body {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
 #root {
-    height: 100%;
-    width: 100%;
-
+  height: 100%;
+  width: 100%;
 }
 
 a {
-    text-decoration: none;
-    color: #dadada;
+  text-decoration: none;
+  color: #dadada;
 }
 
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.wrapper-game {
+  position: relative;
+  padding: 12px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 3;
+}
+
+.bg-alpha {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(../assets/img/backdrop.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  z-index: 1;
+}
+
+.bg-beta {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.card-player {
+  .avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin-bottom: 4px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.player {
+  height: fit-content;
+  border: 1px solid;
+  padding: 4px 12px;
+  text-align: center;
+  border-radius: 8px;
+  background-color: #391898;
+  color: #fff;
+}
+
+.control-side {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.bar-seperate {
+  background-color: #000;
+  width: 12px;
+  height: 6px;
+  border-radius: 3px;
+}
+
+.board-play {
 }

@@ -1,64 +1,64 @@
 .wrapper {
-    height: 100%;
-    width: 100%;
-    background-image: url('../background/galaxy3.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+  height: 100%;
+  width: 100%;
+  background-image: url("../assets/img/bg-home.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .header {
-    padding-top: 40px;
+  padding-top: 40px;
 }
 
 .title {
-    color: #fff;
-    font-size: 90px;
-    text-align: center;
+  color: #fff;
+  font-size: 90px;
+  text-align: center;
 
-    .tic {
-        margin-right: 10px; 
-        color: #f35d64;
-    }
-    
-    .tac {
-        margin-left: 10px;
-        color: #8635c1;
-    }
+  .tic {
+    margin-right: 10px;
+    color: #f35d64;
+  }
 
-    .toe {
-        color: #d1d156;
-    }
+  .tac {
+    margin-left: 10px;
+    color: #8635c1;
+  }
+
+  .toe {
+    color: #d1d156;
+  }
 }
 
 .body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 40px;
 }
 
 .start-game-btn,
 .setting-btn {
-    padding: 16px 58px;
-    margin-top: 30px;
-    border-radius: 30px;
-    font-size: 28px;
-    font-weight: 600;
-    color: #dadada;
-    outline: none;
-    border: none;
-    background: linear-gradient(160deg, #da525e, #5d224e);
-    cursor: pointer;
+  padding: 16px 58px;
+  margin-top: 30px;
+  border-radius: 30px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #dadada;
+  outline: none;
+  border: none;
+  background: linear-gradient(160deg, #da525e, #5d224e);
+  cursor: pointer;
 }
 
 .start-game-btn:hover {
-    background: #f45b60db;
-    color: #fff;
+  background: #f45b60db;
+  color: #fff;
 }
 
 .setting-btn:hover {
-    background: #f45b60db;
-    color: #fff;
+  background: #f45b60db;
+  color: #fff;
 }
