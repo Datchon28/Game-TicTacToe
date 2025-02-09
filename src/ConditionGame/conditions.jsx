@@ -1,3 +1,5 @@
+import { winnerBy } from "../constants/list-prop";
+
 const conditionOuterMostTopLeft = (
   parent,
   children,
@@ -11,7 +13,7 @@ const conditionOuterMostTopLeft = (
     children[childrenIndex]?.use === children[childrenIndex + 3]?.use &&
     children[childrenIndex + 4] === null
   ) {
-    return "Winner Row";
+    return winnerBy.WinnerColumn;
   } else if (
     children[childrenIndex + 1] !== null &&
     children[childrenIndex]?.use !== children[childrenIndex + 1]?.use &&
@@ -20,7 +22,7 @@ const conditionOuterMostTopLeft = (
     children[childrenIndex + 1]?.use === children[childrenIndex + 4]?.use &&
     children[childrenIndex + 1]?.use === children[childrenIndex + 5]?.use
   ) {
-    return "Winner Row Block";
+    return winnerBy.WinnerRowBlock;
   }
 
   // Hang Doc
@@ -33,7 +35,7 @@ const conditionOuterMostTopLeft = (
       parent[parentIndex + 3][childrenIndex]?.use &&
     parent[parentIndex + 4][childrenIndex] === null
   ) {
-    return "Winner Column";
+    return winnerBy.WinnerColumn;
   } else if (
     parent[parentIndex + 1][childrenIndex] !== null &&
     children[childrenIndex]?.use !==
@@ -47,7 +49,7 @@ const conditionOuterMostTopLeft = (
     parent[parentIndex + 1][childrenIndex]?.use ===
       parent[parentIndex + 5][childrenIndex]?.use
   ) {
-    return "Winner Column Block";
+    return winnerBy.WinnerColumnBlock;
   }
 
   // Hang Cheo Tien
@@ -60,7 +62,7 @@ const conditionOuterMostTopLeft = (
       parent[parentIndex + 3][childrenIndex + 3]?.use &&
     parent[parentIndex + 4][childrenIndex + 4] === null
   ) {
-    return "Winner Diagonal Row Plus";
+    return winnerBy.WinnerDiagonalRowPlus;
   } else if (
     parent[parentIndex + 1][childrenIndex + 1] !== null &&
     children[childrenIndex]?.use !==
@@ -74,7 +76,7 @@ const conditionOuterMostTopLeft = (
     parent[parentIndex + 1][childrenIndex + 1]?.use ===
       parent[parentIndex + 5][childrenIndex + 5]?.use
   ) {
-    return "Winner Diagonal Row Plus Block";
+    return winnerBy.WinnerDiagonalRowPlusBlock;
   }
 
   return null;
@@ -93,7 +95,7 @@ const conditionOuterMostTopRight = (
     children[childrenIndex]?.use === children[childrenIndex - 3]?.use &&
     children[childrenIndex - 4] === null
   ) {
-    return "Winner Row";
+    return winnerBy.WinnerRow;
   } else if (
     children[childrenIndex - 1] !== null &&
     children[childrenIndex]?.use !== children[childrenIndex - 1]?.use &&
@@ -102,7 +104,7 @@ const conditionOuterMostTopRight = (
     children[childrenIndex - 1]?.use === children[childrenIndex - 4]?.use &&
     children[childrenIndex - 1]?.use === children[childrenIndex - 5]?.use
   ) {
-    return "Winner Row Block";
+    return winnerBy.WinnerRowBlock;
   }
 
   // Hang Doc
@@ -115,7 +117,7 @@ const conditionOuterMostTopRight = (
       parent[parentIndex + 3][childrenIndex]?.use &&
     parent[parentIndex + 4][childrenIndex] === null
   ) {
-    return "Winner Column";
+    return winnerBy.WinnerColumn;
   }
 
   // Hang Cheo Tien
@@ -128,7 +130,7 @@ const conditionOuterMostTopRight = (
       parent[parentIndex + 3][childrenIndex - 3]?.use &&
     parent[parentIndex + 4][childrenIndex - 4] === null
   ) {
-    return "Winner Diagonal Row Minus";
+    return winnerBy.WinnerDiagonalRowMinus;
   }
 
   return null;
@@ -147,7 +149,7 @@ const conditionOuterMostBottomLeft = (
     children[childrenIndex]?.use === children[childrenIndex + 3]?.use &&
     children[childrenIndex + 4] === null
   ) {
-    return "Winner Row";
+    return winnerBy.WinnerRow;
   }
 
   // Hang Doc
@@ -160,7 +162,7 @@ const conditionOuterMostBottomLeft = (
       parent[parentIndex - 3][childrenIndex]?.use &&
     parent[parentIndex - 4][childrenIndex] === null
   ) {
-    return "Winner Column";
+    return winnerBy.WinnerColumn;
   }
 
   // Hang Cheo Lui
@@ -173,7 +175,7 @@ const conditionOuterMostBottomLeft = (
       parent[parentIndex - 3][childrenIndex + 3]?.use &&
     parent[parentIndex - 4][childrenIndex + 4] === null
   ) {
-    return "Winner Diagonal Row Minus";
+    return winnerBy.WinnerDiagonalRowMinus;
   }
 
   return null;
@@ -192,7 +194,7 @@ const conditionOuterMostBottomRight = (
     children[childrenIndex]?.use === children[childrenIndex - 3]?.use &&
     children[childrenIndex - 4] === null
   ) {
-    return "Winner Row";
+    return winnerBy.WinnerRow;
   } else if (
     children[childrenIndex - 1] !== null &&
     children[childrenIndex]?.use !== children[childrenIndex - 1]?.use &&
@@ -201,7 +203,7 @@ const conditionOuterMostBottomRight = (
     children[childrenIndex - 1]?.use === children[childrenIndex - 4]?.use &&
     children[childrenIndex - 1]?.use === children[childrenIndex - 5]?.use
   ) {
-    return "Winner Row Block";
+    return winnerBy.WinnerRowBlock;
   }
 
   // Hang Doc
@@ -214,7 +216,7 @@ const conditionOuterMostBottomRight = (
       parent[parentIndex - 3][childrenIndex]?.use &&
     parent[parentIndex - 4][childrenIndex] === null
   ) {
-    return "Winner Column";
+    return winnerBy.WinnerColumn;
   } else if (
     parent[parentIndex - 1][childrenIndex] !== null &&
     children[childrenIndex]?.use !==
@@ -228,7 +230,7 @@ const conditionOuterMostBottomRight = (
     parent[parentIndex - 1][childrenIndex]?.use ===
       parent[parentIndex - 5][childrenIndex]?.use
   ) {
-    return "Winner Column Block";
+    return winnerBy.WinnerColumnBlock;
   }
 
   // Hang Cheo Tien
@@ -241,7 +243,7 @@ const conditionOuterMostBottomRight = (
       parent[parentIndex - 3][childrenIndex - 3]?.use &&
     parent[parentIndex - 4][childrenIndex - 4] === null
   ) {
-    return "Winner Diagonal Row Plus";
+    return winnerBy.WinnerDiagonalRowPlus;
   }
 
   return null;
@@ -261,7 +263,7 @@ const conditionOuterMostTopFree = (
       children[childrenIndex]?.use === children[childrenIndex + 3]?.use &&
       children[childrenIndex - 1] === null
     ) {
-      return "Winner Row";
+      return winnerBy.WinnerRow;
     }
   } else if (childrenIndex < children.length - 4) {
     if (
@@ -271,7 +273,7 @@ const conditionOuterMostTopFree = (
       children[childrenIndex + 4] === null &&
       children[childrenIndex - 1] === null
     ) {
-      return "Winner Row";
+      return winnerBy.WinnerRow;
     } else if (
       children[childrenIndex]?.use === children[childrenIndex + 1]?.use &&
       children[childrenIndex]?.use === children[childrenIndex + 2]?.use &&
@@ -280,7 +282,7 @@ const conditionOuterMostTopFree = (
       children[childrenIndex - 1] !== null &&
       children[childrenIndex - 1] !== children[childrenIndex]?.use
     ) {
-      return "Winner Row Block";
+      return winnerBy.WinnerRowBlock;
     } else if (
       children[childrenIndex]?.use === children[childrenIndex + 1]?.use &&
       children[childrenIndex]?.use === children[childrenIndex + 2]?.use &&
@@ -289,7 +291,7 @@ const conditionOuterMostTopFree = (
       children[childrenIndex + 5] !== null &&
       children[childrenIndex]?.use !== children[childrenIndex + 5]?.use
     ) {
-      return "Winner Row Block";
+      return winnerBy.WinnerRowBlock;
     }
   }
 
@@ -303,7 +305,7 @@ const conditionOuterMostTopFree = (
       parent[parentIndex + 3][childrenIndex]?.use &&
     parent[parentIndex + 4][childrenIndex] === null
   ) {
-    return "Winner Column";
+    return winnerBy.WinnerColumn;
   } else if (
     children[childrenIndex]?.use ===
       parent[parentIndex + 1][childrenIndex]?.use &&
@@ -316,7 +318,7 @@ const conditionOuterMostTopFree = (
     parent[parentIndex + 5][childrenIndex] !== null &&
     children[childrenIndex]?.use !== parent[parentIndex + 5][childrenIndex]?.use
   ) {
-    return "Winner Column Block";
+    return winnerBy.WinnerColumnBlock;
   }
 
   // Hang Cheo Tien
@@ -329,7 +331,7 @@ const conditionOuterMostTopFree = (
       children[childrenIndex]?.use ===
         parent[parentIndex + 3][childrenIndex + 3]?.use
     ) {
-      return "Winner Diagonal Row Plus";
+      return winnerBy.WinnerDiagonalRowPlus;
     }
   } else if (childrenIndex < children.length - 4) {
     if (
@@ -341,7 +343,7 @@ const conditionOuterMostTopFree = (
         parent[parentIndex + 3][childrenIndex + 3]?.use &&
       parent[parentIndex + 4][childrenIndex + 4] === null
     ) {
-      return "Winner Diagonal Row Plus";
+      return winnerBy.WinnerDiagonalRowPlus;
     }
   }
 
@@ -355,7 +357,7 @@ const conditionOuterMostTopFree = (
       children[childrenIndex]?.use ===
         parent[parentIndex + 3][childrenIndex - 3]?.use
     ) {
-      return "Winner Diagonal Row Minus";
+      return winnerBy.WinnerDiagonalRowMinus;
     }
   } else if (childrenIndex > 3) {
     if (
@@ -367,7 +369,21 @@ const conditionOuterMostTopFree = (
         parent[parentIndex + 3][childrenIndex - 3]?.use &&
       parent[parentIndex + 4][childrenIndex - 4] === null
     ) {
-      return "Winner Diagonal Row Minus";
+      return winnerBy.WinnerDiagonalRowMinus;
+    } else if (
+      children[childrenIndex]?.use ===
+        parent[parentIndex + 1][childrenIndex - 1]?.use &&
+      children[childrenIndex]?.use ===
+        parent[parentIndex + 2][childrenIndex - 2]?.use &&
+      children[childrenIndex]?.use ===
+        parent[parentIndex + 3][childrenIndex - 3]?.use &&
+      children[childrenIndex]?.use ===
+        parent[parentIndex + 4][childrenIndex - 4].use &&
+      parent[parentIndex + 5][childrenIndex - 5] !== null &&
+      children[childrenIndex]?.use !==
+        parent[parentIndex + 5][childrenIndex - 5]?.use
+    ) {
+      return winnerBy.WinnerDiagonalRowMinusBlock;
     }
   }
 
@@ -387,7 +403,7 @@ const conditionOuterMostLeftFree = (
     children[childrenIndex]?.use === children[childrenIndex + 3]?.use &&
     children[childrenIndex + 4] === null
   ) {
-    return "Winner Row";
+    return winnerBy.WinnerRow;
   } else if (
     children[childrenIndex]?.use === children[childrenIndex + 1]?.use &&
     children[childrenIndex]?.use === children[childrenIndex + 2]?.use &&
@@ -396,7 +412,7 @@ const conditionOuterMostLeftFree = (
     children[childrenIndex + 5] !== null &&
     children[childrenIndex]?.use !== children[childrenIndex + 5]?.use
   ) {
-    return "Winner Row Block";
+    return winnerBy.WinnerRowBlock;
   }
 
   // Hang Doc
@@ -410,7 +426,7 @@ const conditionOuterMostLeftFree = (
         parent[parentIndex + 3][childrenIndex]?.use &&
       parent[parentIndex - 1][childrenIndex] === null
     ) {
-      return "Winner Column";
+      return winnerBy.WinnerColumn;
     }
   } else if (parentIndex < parent.length - 4) {
     if (
@@ -423,7 +439,7 @@ const conditionOuterMostLeftFree = (
       parent[parentIndex + 4][childrenIndex] === null &&
       parent[parentIndex - 1][childrenIndex] === null
     ) {
-      return "Winner Column";
+      return winnerBy.WinnerColumn;
     } else if (
       children[childrenIndex]?.use ===
         parent[parentIndex + 1][childrenIndex]?.use &&
@@ -437,7 +453,7 @@ const conditionOuterMostLeftFree = (
       children[childrenIndex]?.use !==
         parent[parentIndex - 1][childrenIndex]?.use
     ) {
-      return "Winner Column Block";
+      return winnerBy.WinnerColumnBlock;
     } else if (
       children[childrenIndex]?.use ===
         parent[parentIndex + 1][childrenIndex]?.use &&
@@ -451,7 +467,7 @@ const conditionOuterMostLeftFree = (
       children[childrenIndex]?.use !==
         parent[parentIndex + 5][childrenIndex]?.use
     ) {
-      return "Winner Column Block";
+      return winnerBy.WinnerColumnBlock;
     }
   }
 
@@ -465,7 +481,7 @@ const conditionOuterMostLeftFree = (
       children[childrenIndex]?.use ===
         parent[parentIndex + 3][childrenIndex + 3]?.use
     ) {
-      return "Winner Diagonal Row Plus";
+      return winnerBy.WinnerDiagonalRowPlus;
     }
   } else if (parentIndex < parent.length - 4) {
     if (
@@ -477,7 +493,7 @@ const conditionOuterMostLeftFree = (
         parent[parentIndex + 3][childrenIndex + 3]?.use &&
       parent[parentIndex + 4][childrenIndex + 4] === null
     ) {
-      return "Winner Diagonal Row Plus";
+      return winnerBy.WinnerDiagonalRowPlus;
     }
   }
 
@@ -492,7 +508,7 @@ const conditionOuterMostLeftFree = (
         parent[parentIndex - 3][childrenIndex + 3]?.use &&
       parent[parentIndex - 4][childrenIndex + 4] === null
     ) {
-      return "Winner Diagonal Row Minus";
+      return winnerBy.WinnerDiagonalRowMinus;
     }
   }
 
@@ -512,7 +528,7 @@ const conditionOuterMostRightFree = (
     children[childrenIndex]?.use === children[childrenIndex - 3]?.use &&
     children[childrenIndex - 4] === null
   ) {
-    return "Winner Row";
+    return winnerBy.WinnerRow;
   }
 
   // Hang Doc
@@ -526,7 +542,7 @@ const conditionOuterMostRightFree = (
         parent[parentIndex + 3][childrenIndex]?.use &&
       parent[parentIndex - 1][childrenIndex] === null
     ) {
-      return "Winner Column";
+      return winnerBy.WinnerColumn;
     }
   } else if (parentIndex < parent.length - 4) {
     if (
@@ -539,7 +555,7 @@ const conditionOuterMostRightFree = (
       parent[parentIndex + 4][childrenIndex] === null &&
       parent[parentIndex - 1][childrenIndex] === null
     ) {
-      return "Winner Column";
+      return winnerBy.WinnerColumn;
     } else if (
       parent[parentIndex - 1][childrenIndex] !== null &&
       children[childrenIndex]?.use !==
@@ -553,7 +569,7 @@ const conditionOuterMostRightFree = (
       children[childrenIndex]?.use ===
         parent[parentIndex + 4][childrenIndex]?.use
     ) {
-      return "Winner Column Block";
+      return winnerBy.WinnerColumnBlock;
     } else if (
       children[childrenIndex]?.use ===
         parent[parentIndex + 1][childrenIndex]?.use &&
@@ -567,7 +583,7 @@ const conditionOuterMostRightFree = (
       children[childrenIndex]?.use !==
         parent[parentIndex + 5][childrenIndex]?.use
     ) {
-      return "Winner Column Block";
+      return winnerBy.WinnerColumnBlock;
     }
   }
 
@@ -582,7 +598,7 @@ const conditionOuterMostRightFree = (
         parent[parentIndex - 3][childrenIndex - 3]?.use &&
       parent[parentIndex - 4][childrenIndex - 4] === null
     ) {
-      return "Winner Diagonal Row Plus";
+      return winnerBy.WinnerDiagonalRowPlus;
     }
   }
 
@@ -596,7 +612,7 @@ const conditionOuterMostRightFree = (
       children[childrenIndex]?.use ===
         parent[parentIndex + 3][childrenIndex - 3]?.use
     ) {
-      return "Winner Diagonal Row Minus";
+      return winnerBy.WinnerDiagonalRowMinus;
     }
   } else if (parentIndex < parent.length - 4) {
     if (
@@ -608,7 +624,7 @@ const conditionOuterMostRightFree = (
         parent[parentIndex + 3][childrenIndex - 3]?.use &&
       parent[parentIndex + 4][childrenIndex - 4] === null
     ) {
-      return "Winner Diagonal Row Minus";
+      return winnerBy.WinnerDiagonalRowMinus;
     }
   }
 
@@ -629,7 +645,7 @@ const conditionOuterMostBottomFree = (
       children[childrenIndex]?.use === children[childrenIndex + 3]?.use &&
       children[childrenIndex - 1] === null
     ) {
-      return "Winner Row";
+      return winnerBy.WinnerRow;
     }
   } else if (childrenIndex < children.length - 4) {
     if (
@@ -639,7 +655,7 @@ const conditionOuterMostBottomFree = (
       children[childrenIndex + 4] === null &&
       children[childrenIndex - 1] === null
     ) {
-      return "Winner Row";
+      return winnerBy.WinnerRow;
     } else if (
       children[childrenIndex]?.use === children[childrenIndex + 1]?.use &&
       children[childrenIndex]?.use === children[childrenIndex + 2]?.use &&
@@ -648,7 +664,7 @@ const conditionOuterMostBottomFree = (
       children[childrenIndex - 1] !== null &&
       children[childrenIndex]?.use !== children[childrenIndex - 1]?.use
     ) {
-      return "Winner Row Block";
+      return winnerBy.WinnerRowBlock;
     } else if (
       children[childrenIndex]?.use === children[childrenIndex + 1]?.use &&
       children[childrenIndex]?.use === children[childrenIndex + 2]?.use &&
@@ -657,7 +673,7 @@ const conditionOuterMostBottomFree = (
       children[childrenIndex + 5] !== null &&
       children[childrenIndex]?.use !== children[childrenIndex + 5]?.use
     ) {
-      return "Winner Row Block";
+      return winnerBy.WinnerRowBlock;
     }
   }
 
@@ -671,7 +687,7 @@ const conditionOuterMostBottomFree = (
       parent[parentIndex - 3][childrenIndex]?.use &&
     parent[parentIndex - 4][childrenIndex] === null
   ) {
-    return "Winner Column";
+    return winnerBy.WinnerColumn;
   }
 
   // Hang Cheo Tien
@@ -684,7 +700,7 @@ const conditionOuterMostBottomFree = (
       parent[parentIndex - 3][childrenIndex - 3]?.use &&
     parent[parentIndex - 4][childrenIndex - 4] === null
   ) {
-    return "Winner Diagonal Row Plus";
+    return winnerBy.WinnerDiagonalRowPlus;
   }
 
   // Hang Cheo Lui
@@ -697,7 +713,7 @@ const conditionOuterMostBottomFree = (
       children[childrenIndex]?.use ===
         parent[parentIndex - 3][childrenIndex + 3]?.use
     ) {
-      return "Winner Diagonal Row Minus";
+      return winnerBy.WinnerDiagonalRowMinus;
     }
   } else if (childrenIndex < children.length - 4) {
     if (
@@ -709,7 +725,7 @@ const conditionOuterMostBottomFree = (
         parent[parentIndex - 3][childrenIndex + 3]?.use &&
       parent[parentIndex - 4][childrenIndex + 4] === null
     ) {
-      return "Winner Diagonal Row Minus";
+      return winnerBy.WinnerDiagonalRowMinus;
     }
   }
 
@@ -725,7 +741,7 @@ const conditionAllFree = (parent, children, parentIndex, childrenIndex) => {
     children[childrenIndex + 4] === null &&
     children[childrenIndex - 1] === null
   ) {
-    return "Winner Row";
+    return winnerBy.WinnerRow;
   } else if (
     children[childrenIndex - 1] !== null &&
     children[childrenIndex]?.use === children[childrenIndex + 1]?.use &&
@@ -733,7 +749,7 @@ const conditionAllFree = (parent, children, parentIndex, childrenIndex) => {
     children[childrenIndex]?.use === children[childrenIndex + 3]?.use &&
     children[childrenIndex]?.use === children[childrenIndex + 4]?.use
   ) {
-    return "Winner Row Block";
+    return winnerBy.WinnerRowBlock;
   } else if (
     children[childrenIndex]?.use === children[childrenIndex + 1]?.use &&
     children[childrenIndex]?.use === children[childrenIndex + 2]?.use &&
@@ -742,7 +758,7 @@ const conditionAllFree = (parent, children, parentIndex, childrenIndex) => {
     children[childrenIndex + 5] !== null &&
     children[childrenIndex - 1] === null
   ) {
-    return "Winner Row Block";
+    return winnerBy.WinnerRowBlock;
   }
 
   if (parentIndex < parent.length - 4) {
@@ -757,7 +773,7 @@ const conditionAllFree = (parent, children, parentIndex, childrenIndex) => {
       parent[parentIndex + 4][childrenIndex] === null &&
       parent[parentIndex - 1][childrenIndex] === null
     ) {
-      return "Winner Column";
+      return winnerBy.WinnerColumn;
     } else if (
       parent[parentIndex - 1][childrenIndex] !== null &&
       children[childrenIndex]?.use !==
@@ -771,7 +787,7 @@ const conditionAllFree = (parent, children, parentIndex, childrenIndex) => {
       children[childrenIndex]?.use ===
         parent[parentIndex + 4][childrenIndex]?.use
     ) {
-      return "Winner Column Block";
+      return winnerBy.WinnerColumnBlock;
     } else if (
       children[childrenIndex]?.use ===
         parent[parentIndex + 1][childrenIndex]?.use &&
@@ -784,7 +800,7 @@ const conditionAllFree = (parent, children, parentIndex, childrenIndex) => {
       parent[parentIndex + 5][childrenIndex] !== null &&
       children[childrenIndex]?.use !== parent[parentIndex + 5][childrenIndex]
     ) {
-      return "Winner Column Block";
+      return winnerBy.WinnerColumnBlock;
     }
 
     // Hang Cheo Tien
@@ -798,7 +814,7 @@ const conditionAllFree = (parent, children, parentIndex, childrenIndex) => {
       parent[parentIndex + 4][childrenIndex + 4] === null &&
       parent[parentIndex - 1][childrenIndex - 1] === null
     ) {
-      return "Winner Diagonal Row Plus";
+      return winnerBy.WinnerDiagonalRowPlus;
     } else if (
       parent[parentIndex - 1][childrenIndex - 1] !== null &&
       children[childrenIndex]?.use !==
@@ -812,7 +828,7 @@ const conditionAllFree = (parent, children, parentIndex, childrenIndex) => {
       children[childrenIndex]?.use ===
         parent[parentIndex + 4][childrenIndex + 4]?.use
     ) {
-      return "Winner Diagonal Row Plus Block";
+      return winnerBy.WinnerDiagonalRowPlusBlock;
     } else if (
       children[childrenIndex]?.use ===
         parent[parentIndex + 1][childrenIndex + 1]?.use &&
@@ -826,7 +842,7 @@ const conditionAllFree = (parent, children, parentIndex, childrenIndex) => {
       children[childrenIndex]?.use !==
         parent[parentIndex + 5][childrenIndex + 5]?.use
     ) {
-      return "Winner Diagonal Row Plus Block";
+      return winnerBy.WinnerDiagonalRowPlusBlock;
     }
 
     // Hang Cheo Lui
@@ -840,7 +856,7 @@ const conditionAllFree = (parent, children, parentIndex, childrenIndex) => {
       parent[parentIndex + 4][childrenIndex - 4] === null &&
       parent[parentIndex - 1][childrenIndex + 1] === null
     ) {
-      return "Winner Diagonal Row Minus";
+      return winnerBy.WinnerDiagonalRowMinus;
     } else if (
       parent[parentIndex - 1][childrenIndex + 1] !== null &&
       children[childrenIndex]?.use !==
@@ -854,7 +870,7 @@ const conditionAllFree = (parent, children, parentIndex, childrenIndex) => {
       children[childrenIndex]?.use ===
         parent[parentIndex + 4][childrenIndex - 4]?.use
     ) {
-      return "Winner Diagonal Row Minus Block";
+      return winnerBy.WinnerDiagonalRowMinusBlock;
     } else if (
       children[childrenIndex]?.use ===
         parent[parentIndex + 1][childrenIndex - 1]?.use &&
@@ -868,7 +884,7 @@ const conditionAllFree = (parent, children, parentIndex, childrenIndex) => {
       children[childrenIndex]?.use !==
         parent[parentIndex + 5][childrenIndex - 5]?.use
     ) {
-      return "Winner Diagonal Row Minus Block";
+      return winnerBy.WinnerDiagonalRowMinusBlock;
     }
   }
 

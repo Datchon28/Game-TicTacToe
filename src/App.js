@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home/Home";
 import BigBoard from "./BigBoard";
 import GameMain from "./Game";
+import ChoiceCharacter from "./ChoiceCharacters";
 
 const cx = classNames.bind(style);
 
@@ -15,7 +16,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           {/* <Route path="/game" element={<BigBoard />} /> */}
-          <Route path="/game" element={<GameMain />} />
+          <Route path="/game/:id" element={<GameMain />} />
+          <Route path="/ready/:id" element={<ChoiceCharacter />} />
         </Routes>
       </div>
     </BrowserRouter>

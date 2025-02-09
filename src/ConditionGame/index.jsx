@@ -78,6 +78,8 @@ export default function conditionWin(array) {
             k,
             i
           );
+          console.log(result);
+
           if (result !== null) {
             const winner = {
               row: k,

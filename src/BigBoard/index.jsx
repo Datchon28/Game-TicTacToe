@@ -1,50 +1,41 @@
 import { useEffect, useRef, useState } from "react";
 import style from "./bigboard.module.scss";
 import classNames from "classnames/bind";
+import { Button } from "@headlessui/react";
 
-import xIcon from "../assets/img/x.png";
-import oIcon from "../assets/img/o.png";
 import conditionWin from "../ConditionGame";
 import Player from "../Players";
+import { winnerPlayer } from "../ConditionGame/winner-gamer";
+import { initBoard } from "../constants/list-prop";
+import MenuGame from "./components/menu-game";
+import music from "../assets/music-game/music-game.mp3";
 
 const cx = classNames.bind(style);
 
 function BigBoard() {
-  const [init, setInit] = useState(
-    Array(10).fill([
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-    ])
-  );
+  const [init, setInit] = useState(initBoard);
 
+  const shapePlayer = {
+    shapePlayer1: JSON.parse(localStorage.getItem("pl1")),
+    shapePlayer2: JSON.parse(localStorage.getItem("pl2")),
+  };
   const [player, setPlayer] = useState(1);
-  const [checkWinner, setCheckWinner] = useState();
-  const [winner, setWinner] = useState();
+  const [checkWinner, setCheckWinner] = useState(false);
+  const [winner, setWinner] = useState(false);
 
-  const addX = async (e, index, indexRow) => {
-    if (winner === "Have Winner") {
-      return;
-    }
+  const addX = async (index, indexRow, item) => {
+    if (winner) return;
+    if (item !== null) return;
+
     const initCop = [...init];
     const useCop = [...initCop[index]];
 
     useCop[indexRow] = {
       player: player,
-      use: player === 1 ? "x" : "o",
+      use:
+        player === 1
+          ? shapePlayer.shapePlayer1.name
+          : shapePlayer.shapePlayer2.name,
       blockWin: false,
     };
     initCop[index] = useCop;
@@ -54,198 +45,41 @@ function BigBoard() {
     setPlayer(player === 1 ? 2 : 1);
   };
 
-  const displayWinner = (winnerData) => {
-    const copyData = [...init];
-    switch (winnerData.winnerBy) {
-      case "Winner Row": {
-        copyData.forEach((row, indexRow) => {
-          if (indexRow === winnerData.row) {
-            row.forEach((col, indexCol) => {
-              if (indexCol === winnerData.col) {
-                col["blockWin"] = true;
-                for (let i = 1; i < 4; i++) {
-                  row[indexCol + i]["blockWin"] = true;
-                }
-              }
-            });
-          }
-        });
-        break;
-      }
-
-      case "Winner Row Block": {
-        if (winnerData.row !== 0 && winnerData.col !== 0) {
-          copyData[winnerData.row][winnerData.col]["blockWin"] = true;
-          for (let i = 1; i < 5; i++) {
-            copyData[winnerData.row][winnerData.col + i]["blockWin"] = true;
-          }
-        } else if (winnerData.row === 0 && winnerData.col !== 0) {
-          copyData[0][winnerData.col]["blockWin"] = true;
-          for (let i = 1; i < 5; i++) {
-            copyData[0][winnerData.col + i]["blockWin"] = true;
-          }
-        } else if (winnerData.row === 0 && winnerData.col === 0) {
-          copyData[winnerData.row][winnerData.col + 1]["blockWin"] = true;
-          for (let i = 1; i < 5; i++) {
-            copyData[0][winnerData.col + i + 1]["blockWin"] = true;
-          }
-        }
-        break;
-      }
-      case "Winner Column": {
-        if (winnerData.row !== 0 && winnerData.col !== 0) {
-          if (winnerData.row === copyData.length - 1) {
-            for (let i = 0; i < 4; i++) {
-              copyData[winnerData.row - i][winnerData.col]["blockWin"] = true;
-            }
-          } else {
-            for (let i = 0; i < 4; i++) {
-              copyData[winnerData.row + i][winnerData.col]["blockWin"] = true;
-            }
-          }
-        } else if (winnerData.row === 0 && winnerData.col === 0) {
-          for (let i = 0; i < 4; i++) {
-            copyData[winnerData.row + i][0]["blockWin"] = true;
-          }
-        } else if (winnerData.row === 0 && winnerData.col !== 0) {
-          for (let i = 0; i < 4; i++) {
-            copyData[0 + i][winnerData.col]["blockWin"] = true;
-          }
-        } else if (winnerData.row !== 0 && winnerData.col === 0) {
-          for (let i = 0; i < 4; i++) {
-            copyData[winnerData.row + i][0]["blockWin"] = true;
-          }
-        }
-        break;
-      }
-      case "Winner Column Block": {
-        if (winnerData.row !== 0 && winnerData.col !== 0) {
-          for (let i = 0; i < 5; i++) {
-            copyData[winnerData.row + i][winnerData.col]["blockWin"] = true;
-          }
-        } else if (winnerData.row !== 0 && winnerData.col === 0) {
-          for (let i = 0; i < 5; i++) {
-            copyData[winnerData.row + i][0]["blockWin"] = true;
-          }
-        } else if (winnerData.row === 0 && winnerData.col === 0) {
-          for (let i = 0; i < 5; i++) {
-            copyData[winnerData.row + i + 1][0]["blockWin"] = true;
-          }
-        } else if (winnerData.row === 0 && winnerData.col !== 0) {
-          for (let i = 0; i < 5; i++) {
-            copyData[winnerData.row + i][winnerData.col]["blockWin"] = true;
-          }
-        }
-        break;
-      }
-      case "Winner Diagonal Row Plus": {
-        if (winnerData.row !== 0 && winnerData.col !== 0) {
-          if (copyData[winnerData.row].length - 1 === winnerData.col) {
-            for (let i = 0; i < 4; i++) {
-              copyData[winnerData.row - i][winnerData.col - i][
-                "blockWin"
-              ] = true;
-            }
-          } else {
-            for (let i = 0; i < 4; i++) {
-              copyData[winnerData.row + i][winnerData.col + i][
-                "blockWin"
-              ] = true;
-            }
-          }
-        } else if (winnerData.row !== 0 && winnerData.col === 0) {
-          for (let i = 0; i < 4; i++) {
-            copyData[winnerData.row + i][winnerData.col + i]["blockWin"] = true;
-          }
-        } else if (winnerData.row === 0 && winnerData.col === 0) {
-          for (let i = 0; i < 4; i++) {
-            copyData[winnerData.row + i][winnerData.col + i]["blockWin"] = true;
-          }
-        } else if (winnerData.row === 0 && winnerData.col !== 0) {
-          for (let i = 0; i < 4; i++) {
-            copyData[winnerData.row + i][winnerData.col + i]["blockWin"] = true;
-          }
-        }
-
-        break;
-      }
-      case "Winner Diagonal Row Plus Block": {
-        if (winnerData.row !== 0 && winnerData.col !== 0) {
-          for (let i = 0; i < 5; i++) {
-            copyData[winnerData.row + i][winnerData.col + i]["blockWin"] = true;
-          }
-        } else if (winnerData.row === 0 && winnerData.col === 0) {
-          for (let i = 0; i < 5; i++) {
-            copyData[winnerData.row + i + 1][winnerData.col + i + 1][
-              "blockWin"
-            ] = true;
-          }
-        }
-
-        break;
-      }
-      case "Winner Diagonal Row Minus": {
-        if (winnerData.row !== 0 && winnerData.col !== 0) {
-          if (winnerData.row === copyData.length - 1) {
-            for (let i = 0; i < 4; i++) {
-              copyData[winnerData.row - i][winnerData.col + i][
-                "blockWin"
-              ] = true;
-            }
-          } else {
-            for (let i = 0; i < 4; i++) {
-              copyData[winnerData.row + i][winnerData.col - i][
-                "blockWin"
-              ] = true;
-            }
-          }
-        } else if (winnerData.row !== 0 && winnerData.col === 0) {
-          for (let i = 0; i < 4; i++) {
-            copyData[winnerData.row - i][winnerData.col + i]["blockWin"] = true;
-          }
-        } else if (winnerData.row === 0 && winnerData.col === 0) {
-        } else if (winnerData.row === 0 && winnerData.col !== 0) {
-          for (let i = 0; i < 4; i++) {
-            copyData[winnerData.row + i][winnerData.col - i]["blockWin"] = true;
-          }
-        }
-
-        break;
-      }
-      case "Winner Diagonal Row Minus Block": {
-        copyData.forEach((row, indexRow) => {
-          if (indexRow === winnerData.row) {
-            row.forEach((col, indexCol) => {
-              if (indexCol === winnerData.col) {
-                col["blockWin"] = true;
-                for (let i = 1; i < 5; i++) {
-                  copyData[indexRow + i][indexCol - i]["blockWin"] = true;
-                }
-              }
-            });
-          }
-        });
-        break;
-      }
-    }
-
-    setInit(copyData);
-    setWinner("Have Winner");
-  };
-
   useEffect(() => {
     if (checkWinner) {
-      displayWinner(checkWinner);
+      winnerPlayer(init, checkWinner);
+      setInit(winnerPlayer(init, checkWinner));
+      setWinner(true);
     }
   }, [checkWinner]);
 
+  const playAgain = () => {
+    setWinner(false);
+    setCheckWinner(false);
+    setInit(initBoard);
+  };
+
   return (
     <div className="wrapper-game">
-      <Player />
+      <div className="col-player">
+        <Player
+          player={1}
+          currentPlayer={player}
+          shape={shapePlayer.shapePlayer1.character}
+          youWin={winner && player === 2}
+        />
+        <div className="settings">
+          <MenuGame
+            winner={winner}
+            playAgain={playAgain}
+            winnerIs={winner && player === 2 ? 1 : 2}
+          />
+        </div>
+      </div>
       <div className="board-play">
         <div className={cx("big-board-wrapper")}>
           <table id="table-game">
-            <tbody>
+            <tbody className={cx(`${winner && "have-winner"}`)}>
               {init.map((row, index) => (
                 <tr key={index}>
                   {row.map((item, indexRow) => (
@@ -253,15 +87,20 @@ function BigBoard() {
                       <div
                         className={cx(
                           "bo",
-                          `${item?.blockWin === true ? "block-win" : ""}`
+                          " flex justify-center items-center text-center 2xl:w-16 2xl:h-16 xl:w-14 xl:h-14 w-10 h-10 p-2",
+                          `${item !== null && "bo-selected"}`,
+                          `${item?.blockWin ? "block-win" : ""}`
                         )}
-                        onClick={(e) => addX(e, index, indexRow)}
+                        onClick={(e) => addX(index, indexRow, item)}
                       >
-                        {item !== null && item?.use === "x" && (
-                          <img src={xIcon} />
-                        )}
-                        {item !== null && item?.use === "o" && (
-                          <img src={oIcon} />
+                        {item !== null && (
+                          <img
+                            src={
+                              item?.use === shapePlayer.shapePlayer1.name
+                                ? shapePlayer.shapePlayer1.character
+                                : shapePlayer.shapePlayer2.character
+                            }
+                          />
                         )}
                       </div>
                     </td>
@@ -272,7 +111,18 @@ function BigBoard() {
           </table>
         </div>
       </div>
-      <Player />
+      <div className="col-player">
+        <Player
+          player={2}
+          currentPlayer={player}
+          shape={shapePlayer.shapePlayer2.character}
+          youWin={winner && player === 1}
+        />
+
+        <div className="settings">
+          <Button className="text-white">Chat</Button>
+        </div>
+      </div>
     </div>
   );
 }

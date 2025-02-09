@@ -1,0 +1,30 @@
+.choice-charater-wrapper {
+  height: 100%;
+  width: 100%;
+  background-image: url("../assets/img/bg-home.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.list-character {
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 200px;
+
+  button {
+    filter: brightness(0.6);
+  }
+
+  .selected-character {
+    filter: brightness(1.1);
+    scale: 1.4;
+  }
+}
+
+.btn-choiced {
+  background: linear-gradient(160deg, #da525e, #5d224e);
+
+  &:hover {
+    background: #f45b60db;
+  }
+}
