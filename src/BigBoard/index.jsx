@@ -87,7 +87,7 @@ function BigBoard() {
                       <div
                         className={cx(
                           "bo",
-                          " flex justify-center items-center text-center 2xl:w-16 2xl:h-16 xl:w-14 xl:h-14 w-10 h-10 p-2",
+                          " flex justify-center items-center text-center 2xl:w-16 2xl:h-16 xl:w-14 xl:h-14 w-11 h-11 p-2",
                           `${item !== null && "bo-selected"}`,
                           `${item?.blockWin ? "block-win" : ""}`
                         )}

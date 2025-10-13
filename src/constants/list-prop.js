@@ -14,7 +14,6 @@ export const initBoard = Array(10).fill([
   null,
   null,
   null,
-  null,
 ]);
 
 export const winnerBy = {

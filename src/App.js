@@ -6,6 +6,7 @@ import Home from "./Home/Home";
 import BigBoard from "./BigBoard";
 import GameMain from "./Game";
 import ChoiceCharacter from "./ChoiceCharacters";
+import InfinityBoard from "./Game/InfinityBoard";
 
 const cx = classNames.bind(style);
 
@@ -18,6 +19,7 @@ function App() {
           {/* <Route path="/game" element={<BigBoard />} /> */}
           <Route path="/game/:id" element={<GameMain />} />
           <Route path="/ready/:id" element={<ChoiceCharacter />} />
+          <Route path="/iff" element={<InfinityBoard />} />
         </Routes>
       </div>
     </BrowserRouter>

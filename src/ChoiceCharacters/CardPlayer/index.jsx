@@ -4,7 +4,7 @@ function CardPlayer({ shape, player, currentChoiced }) {
   return (
     <div className="card-player-choosing">
       {currentChoiced === player.indexPlayer && (
-        <div className="absolute left-1/2 -top-[77px] w-fit">mui ten</div>
+        <div className="absolute left-1/2 -top-[77px] w-fit text-red-300">mui ten</div>
       )}
       <div className="player">
         <div className="avatar">

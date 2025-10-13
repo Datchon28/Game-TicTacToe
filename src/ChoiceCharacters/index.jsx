@@ -1,15 +1,6 @@
 import classNames from "classnames/bind";
 import style from "./style.module.scss";
 
-import xIcon from "../assets/img/x.png";
-import oIcon from "../assets/img/o.png";
-import alien from "../assets/img/alien.png";
-import monster1 from "../assets/img/monster-1.png";
-import monster2 from "../assets/img/monster.png";
-import kitty from "../assets/img/kitty.png";
-import rocket from "../assets/img/rocket.png";
-import ufo from "../assets/img/ufo.png";
-
 import ava1 from "../assets/img/ava1.svg";
 
 import { useEffect, useState } from "react";
@@ -28,64 +19,43 @@ import Player from "../Players";
 import CardPlayer from "./CardPlayer";
 import { Link, useParams } from "react-router-dom";
 import { dispatchStore } from "../store/function-store";
+import { listCharacters } from '../constants/list-characters'
 
 const cx = classNames.bind(style);
 
 function ChoiceCharacter() {
   const idRoom = useParams();
-  const [characters, setCharacters] = useState([
-    {
-      name: "x",
-      character: xIcon,
-    },
-    {
-      name: "o",
-      character: oIcon,
-    },
-    {
-      name: "alien",
-      character: alien,
-    },
-    {
-      name: "monster-1",
-      character: monster1,
-    },
-    {
-      name: "monster-2",
-      character: monster2,
-    },
-    {
-      name: "kitty",
-      character: kitty,
-    },
-    {
-      name: "rocket",
-      character: rocket,
-    },
-    {
-      name: "ufo",
-      character: ufo,
-    },
-  ]);
-  const defaultCharacter = {
-    name: "x",
-    character: xIcon,
-  };
+  const [characters, setCharacters] = useState(listCharacters);
+
+  const defaultPlayer1 = listCharacters.find(char => char.name === "x");
+  const defaultPlayer2 = listCharacters.find(char => char.name === "o");
+
   let [isOpen, setIsOpen] = useState(false);
-  const [choicedCharacter, setChoicedCharacter] = useState(defaultCharacter);
-  const [currentChoicedCharacter, setCurrentChoicedCharacter] = useState(1);
-  const [player1, setPlayer1] = useState(defaultCharacter);
-  const [player2, setPlayer2] = useState(defaultCharacter);
+  const [choicedCharacter, setChoicedCharacter] = useState(defaultPlayer1);
+  const [currentChoicedCharacter, setCurrentChoicedCharacter] = useState(0);
+  const [player1, setPlayer1] = useState(defaultPlayer1);
+  const [player2,setPlayer2] = useState(defaultPlayer2);
 
   useEffect(() => {
-    if (currentChoicedCharacter === 1) {
-      setPlayer1(choicedCharacter);
-      localStorage.setItem("pl1", JSON.stringify(choicedCharacter));
+    localStorage.setItem("pl1", JSON.stringify(defaultPlayer1));
+    localStorage.setItem("pl2", JSON.stringify(defaultPlayer2));
+  }, []);
+
+  const choosePlayer = (indexPlayer, infoCharPlayer) => {
+    setCurrentChoicedCharacter(indexPlayer);
+    setChoicedCharacter(infoCharPlayer);
+  }
+
+  const handleChooseCharacter = (char) => {
+    setChoicedCharacter(char)
+     if (currentChoicedCharacter === 0) {
+      setPlayer1(char);
+      localStorage.setItem("pl1", JSON.stringify(char));
     } else {
-      setPlayer2(choicedCharacter);
-      localStorage.setItem("pl2", JSON.stringify(choicedCharacter));
+      setPlayer2(char);
+      localStorage.setItem("pl2", JSON.stringify(char));
     }
-  }, [choicedCharacter]);
+  }
 
   return (
     <div className={cx("choice-charater-wrapper")}>
@@ -99,7 +69,7 @@ function ChoiceCharacter() {
       </h2>
 
       <div className="text-white mt-3 flex items-center justify-around">
-        <div onClick={() => setCurrentChoicedCharacter(1)}>
+        <div onClick={() => choosePlayer(0, player1)}>
           <CardPlayer
             currentChoiced={currentChoicedCharacter}
             shape={player1.character}
@@ -111,7 +81,7 @@ function ChoiceCharacter() {
           />
         </div>
 
-        <div onClick={() => setCurrentChoicedCharacter(2)}>
+        <div onClick={() => choosePlayer(1, player2)}>
           <CardPlayer
             currentChoiced={currentChoicedCharacter}
             shape={player2.character}
@@ -173,7 +143,7 @@ function ChoiceCharacter() {
                 }`,
                 "text-center"
               )}
-              onClick={() => setChoicedCharacter(char)}
+              onClick={() => handleChooseCharacter(char)}
             >
               <img src={char.character} className="w-20 h-20" />
             </button>

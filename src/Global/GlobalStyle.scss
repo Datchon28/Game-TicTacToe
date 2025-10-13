@@ -73,12 +73,13 @@ a {
 }
 
 .big-board-wrapper {
-  width: max-content;
-  height: 100vh;
-  max-height: 766px;
-  border-radius: 1rem;
-  margin-top: 1rem;
-  overflow: auto;
+     width: max-content;
+    height: 100vh;
+    border-radius: 1rem;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 table {
@@ -89,7 +90,7 @@ table {
   border-collapse: unset;
 
   td {
-    border: 3px solid transparent;
+    border: 2px solid transparent;
   }
 }
 
