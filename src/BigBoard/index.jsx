@@ -40,8 +40,8 @@ function BigBoard() {
     };
     initCop[index] = useCop;
 
-    setInit(initCop);
-    conditionWin(initCop) && setCheckWinner(conditionWin(initCop));
+    await setInit(initCop);
+    await conditionWin(initCop) && setCheckWinner(conditionWin(initCop));
     setPlayer(player === 1 ? 2 : 1);
   };
 

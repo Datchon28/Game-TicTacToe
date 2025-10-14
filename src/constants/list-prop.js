@@ -16,6 +16,8 @@ export const initBoard = Array(10).fill([
   null,
 ]);
 
+export const initBoardInfinity = Array.from({ length: 30 }, () => Array(40).fill(null));
+
 export const winnerBy = {
   WinnerRow: "Winner Row",
   WinnerRowBlock: "Winner Row Block",

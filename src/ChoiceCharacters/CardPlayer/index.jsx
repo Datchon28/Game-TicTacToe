@@ -7,7 +7,7 @@ function CardPlayer({ shape, player, currentChoiced }) {
         <div className="absolute left-1/2 -top-[77px] w-fit text-red-300">mui ten</div>
       )}
       <div className="player">
-        <div className="avatar">
+        <div className="avatar-custom">
           <img alt="" src={player.avartar} />
         </div>
         <div className="name-player">

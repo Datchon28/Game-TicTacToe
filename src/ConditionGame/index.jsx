@@ -2,7 +2,7 @@ import * as AllConditions from "./conditions";
 
 const Conditions = AllConditions.default;
 
-export default function conditionWin(array) {
+export default async function conditionWin(array) {
   for (let k = 0; k < array.length; k++) {
     for (let i = 0; i < array[k].length; i++) {
       if (array[k][i] !== null) {

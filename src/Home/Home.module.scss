@@ -4,7 +4,7 @@
   background-image: url("../assets/img/background-home.png");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: bottom;
 }
 
 .header {
@@ -41,10 +41,11 @@
 
 .start-game-btn,
 .setting-btn {
-  padding: 16px 58px;
-  margin-top: 30px;
+  width: 100%;
+  padding: 1rem 2.5rem;
+  margin-top: 1.5rem;
   border-radius: 30px;
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 600;
   color: #dadada;
   outline: none;
@@ -53,12 +54,10 @@
   cursor: pointer;
 }
 
-.start-game-btn:hover {
-  background: #f45b60db;
+.start-game-btn:hover,
+.setting-btn
+:hover {
+  background: rgb(244 91 96 / 90%);
   color: #fff;
 }
 
-.setting-btn:hover {
-  background: #f45b60db;
-  color: #fff;
-}

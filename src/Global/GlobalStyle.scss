@@ -73,18 +73,21 @@ a {
 }
 
 .big-board-wrapper {
-     width: max-content;
-    height: 100vh;
-    border-radius: 1rem;
-    overflow: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: max-content;
+  height: 100vh;
+  border-radius: 1rem;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.infinity-board-wrapper {
+  background: rgba(16, 14, 40, 0.8);
 }
 
 table {
   border-radius: 1.5rem;
-  background: #100e28;
   padding: 0.5rem;
   border: 1px dashed #fff;
   border-collapse: unset;
@@ -92,6 +95,11 @@ table {
   td {
     border: 2px solid transparent;
   }
+}
+
+.table-iff {
+  border: 0;
+  border-radius: 0;
 }
 
 .bo {
@@ -172,6 +180,20 @@ table {
 }
 
 .avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin-bottom: 4px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.avatar-custom {
   position: absolute;
   top: -46px;
   left: 50%;

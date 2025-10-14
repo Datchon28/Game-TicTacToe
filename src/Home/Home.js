@@ -41,23 +41,25 @@ function Home({ onClick }) {
         </div>
       )}
 
-      <div className={cx("header")}>
+      {/* <div className={cx("header")}>
         <div className={cx("title")}>
           <span className={cx("tic")}>TIC</span>
           <span className={cx("tac")}>TAC</span>
           <br />
           <span className={cx("toe")}>TOE</span>
         </div>
-      </div>
+      </div> */}
 
       <div className={cx("body")}>
-        <Link to={`/ready/${id}`}>
+        <Link to={`/ready/${id}`} className="w-60">
           <button className={cx("start-game-btn")}>Play Offline</button>
         </Link>
-        <Link to={`/ready/${id}`}>
+        <Link to={`/ready/${id}`} className="w-60">
           <button className={cx("start-game-btn")}>Play Online</button>
         </Link>
-        <button className={cx("setting-btn")}>Settings</button>
+        <Link className="w-60">
+          <button className={cx("start-game-btn")}>Settings</button>
+        </Link>
       </div>
     </div>
   );
