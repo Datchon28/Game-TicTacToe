@@ -1,4 +1,11 @@
 import {
+  faMusic,
+  faRadio,
+  faVolumeLow,
+  faVolumeXmark,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
   Dialog,
   DialogPanel,
   DialogTitle,
@@ -6,13 +13,31 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 
-function SettingModal({ isOpenModal }) {
-    const [isOpen, setIsOpen] = useState(isOpenModal);
+function SettingModal({ isOpenModal, onSave }) {
+  const [isOpen, setIsOpen] = useState(isOpenModal);
+  const [isOpenMusic, setIsOpenMusic] = useState(true);
+
+  const refMusic = useRef();
+
+  const handleMusic = () => {
+    setIsOpenMusic(!isOpenMusic);
+    const music = document.getElementById("music-game");
+    music.muted = !music.muted;
+    refMusic.current.value = isOpenMusic ? 0 : 50;
+  };
+
+  useEffect(() => {
+    setIsOpen(isOpenModal);
+  }, [isOpenModal]);
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={() => setIsOpen(false)}>
+      <Dialog
+        as="div"
+        className="relative z-10"
+        onClose={() => setIsOpen(false)}
+      >
         <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"
@@ -43,14 +68,38 @@ function SettingModal({ isOpenModal }) {
                 >
                   Settings
                 </DialogTitle>
-                <div className="mt-2">
-                  <div className="">
-                    <span>Music</span>
-                    <input type="range" />
+                <div className="mt-7">
+                  <div className="flex items-center">
+                    <div className="">
+                      <button
+                        className="p-1 rounded-md text-white hover:bg-gray-200 hover:text-black"
+                        onClick={handleMusic}
+                      >
+                        {isOpenMusic ? (
+                          <FontAwesomeIcon
+                            className="w-6 "
+                            icon={faVolumeLow}
+                          />
+                        ) : (
+                          <FontAwesomeIcon
+                            className="w-6 "
+                            icon={faVolumeXmark}
+                          />
+                        )}
+                      </button>
+                      <span className="mx-3">Music</span>
+                    </div>
+                    <input ref={refMusic} type="range" className="flex-1" />
                   </div>
-                  <div className="mt-4">
-                    <span>SFX</span>
-                    <input type="range" />
+
+                  <div className="flex items-center mt-3">
+                    <div className="">
+                      <button className="p-1 rounded-md text-white hover:bg-gray-200 hover:text-black">
+                        <FontAwesomeIcon className="w-6 " icon={faRadio} />
+                      </button>
+                      <span className="mx-3">SFX</span>
+                    </div>
+                    <input type="range" className="flex-1" />
                   </div>
                 </div>
 
@@ -58,7 +107,7 @@ function SettingModal({ isOpenModal }) {
                   <button
                     type="button"
                     className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => onSave()}
                   >
                     Save
                   </button>

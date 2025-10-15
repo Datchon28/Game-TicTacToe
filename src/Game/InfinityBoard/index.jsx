@@ -80,6 +80,10 @@ function InfinityBoard() {
     );
   };
 
+  const handlePanning = (e) => {
+    console.log(e);
+  };
+
   useEffect(() => {
     if (checkWinner) {
       winnerPlayer(init, checkWinner);
@@ -122,6 +126,7 @@ function InfinityBoard() {
             minScale={0.8}
             maxScale={2}
             wheel={{ step: 0.1 }}
+            onPanning={handlePanning}
           >
             <TransformComponent
               wrapperStyle={{ width: "100%", height: "100%" }}
