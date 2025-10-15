@@ -4,6 +4,7 @@ import style from "../../../../Global/GlobalStyle.scss";
 const cx = classNames.bind(style);
 
 function HeaderGame({
+  roomInfo,
   player,
   avarPlayer1,
   avarPlayer2,
@@ -31,6 +32,7 @@ function HeaderGame({
           </div>
         </div>
       </div>
+      
       <div className="score-time text-white flex items-center gap-3">
         <p
           className={`time text-xl font-medium ${
@@ -39,10 +41,10 @@ function HeaderGame({
         >
           {timeTurn + "s"}
         </p>
-        <div className="score text-2xl bg-[#e98c29] rounded-md p-2 ">
-          <span>0</span>
+        <div className="score text-2xl bg-[#e98c29] rounded-md py-2 px-3">
+          <span>{roomInfo.scorePlayer1}</span>
           <span className="px-3">-</span>
-          <span>0</span>
+          <span>{roomInfo.scorePlayer2}</span>
         </div>
         <p
           className={`time text-xl font-medium ${
@@ -52,6 +54,7 @@ function HeaderGame({
           {timeTurn + "s"}
         </p>
       </div>
+
       <div className="player-info flex">
         <div className="mt-0 pr-2">
           <h4 className="font-semibold text-base text-white">Người chơi 2</h4>

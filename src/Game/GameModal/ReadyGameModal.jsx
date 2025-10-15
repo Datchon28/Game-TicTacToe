@@ -6,16 +6,16 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 
-import { Fragment, useState, useRef } from "react";
+import { Fragment, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function ReadyGameModal({ onStartGame }) {
-    // const ref = useRef();
-    let [isOpen, setIsOpen] = useState(true);
+  let [isOpen, setIsOpen] = useState(true);
 
-    const readyTheGame = () => {
-    // ref.current.play();
+  const quitGame = () => {
     setIsOpen(false);
-  }
+    sessionStorage.clear();
+  };
 
   return (
     <>
@@ -58,7 +58,7 @@ export default function ReadyGameModal({ onStartGame }) {
                     </p>
                   </div>
 
-                  <div className="mt-4">
+                  <div className="mt-4 float-right">
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
@@ -69,6 +69,15 @@ export default function ReadyGameModal({ onStartGame }) {
                     >
                       Start now !
                     </button>
+                    <Link to='/'>
+                      <button
+                        type="button"
+                        className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-gray-100-100 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        onClick={quitGame}
+                      >
+                        Quit Game
+                      </button>
+                    </Link>
                   </div>
                 </DialogPanel>
               </TransitionChild>

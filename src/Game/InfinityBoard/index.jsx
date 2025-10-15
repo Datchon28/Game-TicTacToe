@@ -18,10 +18,12 @@ const cx = classNames.bind(style);
 function InfinityBoard() {
   const [init, setInit] = useState(initBoardInfinity);
 
+  const roomInfo = JSON.parse(sessionStorage.getItem("roomInfo"));
   const shapePlayer = {
-    shapePlayer1: JSON.parse(localStorage.getItem("pl1")),
-    shapePlayer2: JSON.parse(localStorage.getItem("pl2")),
+    shapePlayer1: JSON.parse(sessionStorage.getItem("pl1")),
+    shapePlayer2: JSON.parse(sessionStorage.getItem("pl2")),
   };
+
   const [player, setPlayer] = useState(1);
   const [checkWinner, setCheckWinner] = useState(false);
   const [winner, setWinner] = useState(false);
@@ -65,12 +67,26 @@ function InfinityBoard() {
     setTimeTurn(30);
   };
 
+  const plusScorePlayer = (player) => {
+    sessionStorage.setItem(
+      "roomInfo",
+      JSON.stringify({
+        ...roomInfo,
+        scorePlayer1:
+          player === 2 ? roomInfo.scorePlayer1 + 1 : roomInfo.scorePlayer1,
+        scorePlayer2:
+          player === 1 ? roomInfo.scorePlayer2 + 1 : roomInfo.scorePlayer2,
+      })
+    );
+  };
+
   useEffect(() => {
     if (checkWinner) {
       winnerPlayer(init, checkWinner);
       setInit(winnerPlayer(init, checkWinner));
       setWinner(true);
       setTimeTurn(null);
+      plusScorePlayer(player);
     }
   }, [checkWinner]);
 
@@ -85,7 +101,7 @@ function InfinityBoard() {
   }, [timeTurn]);
 
   return (
-    <div className="wrapper-game-iff w-full h-full">
+    <div id={roomInfo.id} className="wrapper-game-iff w-full h-full">
       <div className="board-play w-full h-full">
         <div
           className={cx(
@@ -93,6 +109,7 @@ function InfinityBoard() {
           )}
         >
           <HeaderGame
+            roomInfo={roomInfo}
             player={player}
             shapePlayer={shapePlayer}
             avarPlayer1={ava1}

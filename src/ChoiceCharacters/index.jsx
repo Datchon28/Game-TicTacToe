@@ -37,8 +37,8 @@ function ChoiceCharacter() {
   const [player2,setPlayer2] = useState(defaultPlayer2);
 
   useEffect(() => {
-    localStorage.setItem("pl1", JSON.stringify(defaultPlayer1));
-    localStorage.setItem("pl2", JSON.stringify(defaultPlayer2));
+    sessionStorage.setItem("pl1", JSON.stringify(defaultPlayer1));
+    sessionStorage.setItem("pl2", JSON.stringify(defaultPlayer2));
   }, []);
 
   const choosePlayer = (indexPlayer, infoCharPlayer) => {
@@ -50,11 +50,20 @@ function ChoiceCharacter() {
     setChoicedCharacter(char)
      if (currentChoicedCharacter === 0) {
       setPlayer1(char);
-      localStorage.setItem("pl1", JSON.stringify(char));
+      sessionStorage.setItem("pl1", JSON.stringify(char));
     } else {
       setPlayer2(char);
-      localStorage.setItem("pl2", JSON.stringify(char));
+      sessionStorage.setItem("pl2", JSON.stringify(char));
     }
+  }
+
+  const goToGameMain = () => {
+    const idRoomGame = idRoom.id;
+    sessionStorage.setItem("roomInfo", JSON.stringify({
+      id: idRoomGame,
+      scorePlayer1: 0,
+      scorePlayer2: 0
+    }))
   }
 
   return (
@@ -158,6 +167,7 @@ function ChoiceCharacter() {
               "text-white rounded-lg text-center px-16 py-4 font-semibold text-xl",
               "btn-choiced"
             )}
+            onClick={() => goToGameMain()}
           >
             Next
           </Button>

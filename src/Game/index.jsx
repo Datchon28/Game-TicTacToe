@@ -1,13 +1,15 @@
 import { useState } from "react";
 import BigBoard from "../BigBoard";
 import Player from "../Players";
+import InfinityBoard from "./InfinityBoard";
 
 function GameMain() {
   return (
     <>
-      <BigBoard />
-      <div className="bg-alpha"></div>
-      <div className="bg-beta"></div>
+      {/* <BigBoard /> */}
+      <InfinityBoard />
+      {/* <div className="bg-alpha"></div>
+      <div className="bg-beta"></div> */}
     </>
   );
 }
