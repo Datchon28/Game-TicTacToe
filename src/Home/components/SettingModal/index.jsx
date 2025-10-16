@@ -1,6 +1,13 @@
 import { faRadio, faVolumeLow, faVolumeXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faMusic,
+  faRadio,
+  faVolumeLow,
+  faVolumeXmark,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
   Dialog,
   DialogPanel,
   DialogTitle,
