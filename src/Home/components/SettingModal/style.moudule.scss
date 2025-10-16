@@ -1,0 +1,51 @@
+/* file: range-volumeSlider.module.css */
+.range-volume {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #1db954 0%, #1db954 var(--fill, 50%), #ccc var(--fill, 50%));
+  outline: none;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+/* Chrome, Safari, Edge */
+.range-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #1db954;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease;
+}
+.range-volume:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+}
+
+/* Firefox */
+.range-volume::-moz-range-volume-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #1db954;
+  transition: transform 0.15s ease;
+}
+.range-volume:active::-moz-range-volume-thumb {
+  transform: scale(1.2);
+}
+
+/* Ẩn default track Firefox */
+.range-volume::-moz-range-volume-track {
+  background: transparent;
+}
+
+/* Optional hover effect */
+.range-volume:hover {
+  background: linear-gradient(90deg, #1ed760 0%, #1ed760 var(--fill, 50%), #ccc var(--fill, 50%));
+}

@@ -38,7 +38,7 @@ function App() {
           <Route path="/ready/:id" element={<ChoiceCharacter />} />
           <Route path="/iff" element={<InfinityBoard />} />
         </Routes>
-        <audio ref={ref} src={music} autoPlay loop muted></audio>
+        <audio id="music-game" ref={ref} src={music} autoPlay loop muted></audio>
       </div>
     </BrowserRouter>
   );

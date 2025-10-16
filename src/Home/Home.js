@@ -28,7 +28,12 @@ function Home({ onClick }) {
   }, []);
 
   return (
-    <div style={{ backgroundImage: `url(${bgUrl})` }} className={cx("wrapper")}>
+    <div
+      style={{ backgroundImage: `url(${bgUrl})` }}
+      className={cx(
+        "wrapper w-full h-full flex flex-col items-center bg-cover bg-no-repeat bg-center max-lg:bg-bottom"
+      )}
+    >
       {!bgLoaded && (
         <div className=" absolute bg-white flex items-center justify-center z-10 inset-0">
           <p>Loading...</p>
@@ -45,8 +50,8 @@ function Home({ onClick }) {
         </div>
       </div>
 
-      <div className={cx("body h-full flex items-center justify-center")}>
-        <div className="button-game-home h-full flex items-center justify-start flex-col">
+      <div className={cx("body flex-1 flex items-center justify-center")}>
+        <div className="button-game-home h-full flex items-center justify-center flex-col">
           <Link to={`/ready/${id}`} className="w-60">
             <button className={cx("start-game-btn")}>Play Offline</button>
           </Link>
@@ -54,12 +59,20 @@ function Home({ onClick }) {
             <button className={cx("start-game-btn")}>Play Online</button>
           </Link>
           <Link className="w-60">
-            <button className={cx("start-game-btn")} onClick={() => setIsOpenSetting(true)}>Settings</button>
+            <button
+              className={cx("start-game-btn")}
+              onClick={() => setIsOpenSetting(true)}
+            >
+              Settings
+            </button>
           </Link>
         </div>
       </div>
 
-      <SettingModal isOpenModal={isOpenSetting} />
+      <SettingModal
+        isOpenModal={isOpenSetting}
+        onSave={() => setIsOpenSetting(!isOpenSetting)}
+      />
     </div>
   );
 }
